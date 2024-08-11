@@ -88,8 +88,8 @@ export const checkout = TryCatch(async (req, res) => {
 });
 
 export const paymentVerification = TryCatch(async (req, res) => {
-  // const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-  //   req.body;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+    req.body;
 
   // const body = razorpay_order_id + "|" + razorpay_payment_id;
 
@@ -107,13 +107,13 @@ export const paymentVerification = TryCatch(async (req, res) => {
   //     razorpay_signature,
   //   });
 
-  //   const user = await User.findById(req.user._id);
+  const user = await User.findById(req.user._id);
 
-  //   const course = await Courses.findById(req.params.id);
+  const course = await Courses.findById(req.params.id);
 
-  //   user.subscription.push(course._id);
+  user.subscription.push(course._id);
 
-  //   await user.save();
+  await user.save();
 
   //   res.status(200).json({
   //     message: "Course Purchased Successfully",
@@ -123,7 +123,8 @@ export const paymentVerification = TryCatch(async (req, res) => {
   //     message: "Payment Failed",
   //   });
   // }
+
   res.status(200).json({
-      message: "Course Purchased Successfully",
-    });
+    message: "Course Purchased Successfully",
+  });
 });
